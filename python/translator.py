@@ -1,5 +1,6 @@
 #MohammadHossein Karimian
 #mohammadkarimian122@gmail.com
+import sys
 class BraillTranslator:
     def __init__(self):
         self.dict_letters_to_braille = {
@@ -50,7 +51,7 @@ class BraillTranslator:
                     translated += 'O..OO.'
                     continue
                 translated += self.dict_letters_to_braille[chr.upper()]
-        print(translated)
+        return translated
 
     def Translate_To_English(self, str):
 
@@ -77,16 +78,21 @@ class BraillTranslator:
                 next_is_capital = False
             else:
                 translated += self.braille_to_letters[current].lower()
-        print(translated)
+        return translated
 
 
 def main():
+    result = ""
     translate = BraillTranslator()
-    str = input()
+    if len(sys.argv) < 2:
+        print("Error: No input provided.")
+        return
+    str = ' '.join(sys.argv[1:])
     if translate.Check_Language(str) == "English":
-        translate.Translate_To_Braille(str)
+        result = translate.Translate_To_Braille(str)
     else:
-        translate.Translate_To_English(str)
+        result = translate.Translate_To_English(str)
+    print(result)
 
 
 if __name__ == "__main__":
